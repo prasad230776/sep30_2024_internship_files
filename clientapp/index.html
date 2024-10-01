@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h2>Welcome to client page</h2>
+    <h3 id="time">default data</h3>
+    <script>
+        let dateEl = document.getElementById("time");
+        async function getDate() {
+            try {
+                let data = await fetch("http://localhost:8080/api/time");
+                let time = await data.json();
+                dateEl.innerText = time[0]
+            }
+            catch (e) {
+                console.log(e);
+            }
+
+        }
+        //getDate();  for displaying just one time
+        setInterval(getDate, 1000); //for displaying every one second 
+    </script>
+</body>
+
+</html>
